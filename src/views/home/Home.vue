@@ -4,26 +4,18 @@
       <div slot="center">购物街</div>
     </nav-bar> -->
     <mt-header title="购物街" class="home-nav"></mt-header>
-
-    <mt-swipe class="swiper">
-      <!-- <mt-swipe-item v-for="(item, key) in banners" :key="key">
-        <a :href="item.link">
-          <img :src="item.image" alt="" />
-        </a>
-      </mt-swipe-item> -->
-      <mt-swipe-item v-for="(item, key) in banners" :key="key" class="swiper-item">
-        <a :href="item.link">
-          <img :src="item.image" alt="" />
-        </a>
-      </mt-swipe-item>
-    </mt-swipe>
+    <!-- 广告轮播图 -->
+    <home-swiper :banners="banners" />
+    <home-recommend-view :recommends="recommends"/>
   </div>
 </template>
 
 <script>
 import NavBar from "components/common/navbar/NavBar";
+import HomeSwiper from './childComps/HomeSwiper'
+import HomeRecommendView from './childComps/HomeRecommendView'
+
 import { getHomeMultidata } from "network/home";
-import { Swipe, SwipeItem } from "mint-ui";
 import { Header } from "mint-ui";
 export default {
   name: "Home",
@@ -35,9 +27,9 @@ export default {
   },
   components: {
     NavBar,
-    Swipe,
-    SwipeItem,
     Header,
+    HomeSwiper,
+    HomeRecommendView
   },
   created() {
     // 请求多个数据
@@ -56,11 +48,5 @@ export default {
   color: #fff;
   height: 44px;
 }
-.swiper {
-  height: 200px;
-}
-.swiper-item a img{
-  width: 100%;
-  height: 100%;
-}
+
 </style>
